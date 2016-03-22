@@ -14,6 +14,7 @@ class PicsController < ApplicationController
 
 	def create
 		@pic = current_user.pics.build(pic_params)
+
 		if @pic.save
 			redirect_to @pic, notice: "Yesss! It was posted!"
 		elsif 
@@ -34,13 +35,14 @@ class PicsController < ApplicationController
 
 	def destroy
 		@pic.destroy
-		#redirect_to root_path, notice: "Your Pic was deleted!"
+		
+		redirect_to root_path, notice: "Your Pic was deleted!"
 	end
 
 	private
 
 		def pic_params
-			params.require(:pic).permit(:title, :description)
+			params.require(:pic).permit(:title, :description, :image)
 		end
 
 		def find_pic
